@@ -74,8 +74,11 @@ documentados en Swagger y en `bulk-samples/upload-commands.txt`.
   `iac_containers_and_scripting/image-publishing`.
 
 La ingesta realiza un pull completo de las tablas de MS1/MS2 y de la colección
-de MS3, genera CSV o JSON Lines y los carga en S3. Es un proceso puntual:
-ejecuta los tres servicios con `docker compose run --rm` cuando quieras repetirla.
+de MS3, genera CSV o JSON Lines y los carga en S3. Cada ejecución es puntual y
+termina al completar la carga; para convertirla en un proceso periódico se
+programa el Compose con cron en la MV de ingesta. El README de
+`data-ingestion` incluye el script recomendado con `flock`, que evita que dos
+ejecuciones se solapen.
 
 ## Correspondencia con la rúbrica
 
